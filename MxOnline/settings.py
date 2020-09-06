@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'apps.operations.apps.OperationsConfig',
     'crispy_forms',
     'xadmin',
-    'DjangoUeditor'
+    'DjangoUeditor',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,10 @@ STATICFILES_DIRS = [
 
 # 修改指定默认用户表
 AUTH_USER_MODEL = 'users.UserProfile'
+
+# 云片相关配置
+yp_apikey = 'd30347d2fb9248760b754137eb312e59'
+
+# redis相关配置
+REDIS_HOST = '212.64.121.122'
+REDIS_PORT = 6379
