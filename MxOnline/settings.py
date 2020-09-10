@@ -25,7 +25,7 @@ SECRET_KEY = 'g0h6ljdjpvd&cgoqkg%(s8*(f72!p^9xkh8sae^+sgrix9)gyg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'xadmin',
     'DjangoUeditor',
-    'captcha'
+    'captcha',
+    'pure_pagination',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -71,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'apps.users.views.message_nums'
             ],
         },
     },
@@ -148,6 +152,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# 上传文件路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'STATIC')
+
 # 修改指定默认用户表
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -157,3 +166,15 @@ yp_apikey = 'd30347d2fb9248760b754137eb312e59'
 # redis相关配置
 REDIS_HOST = '212.64.121.122'
 REDIS_PORT = 6379
+
+#  django-pure-pagination分页设置
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 10,
+    'MARGIN_PAGES_DISPLAYED': 2,
+
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
+
+AUTHENTICATION_BACKENDS = [
+    'apps.users.views.CustomAuth'
+]

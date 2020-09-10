@@ -75,3 +75,17 @@ class UserCourse(BaseModel):
 
     def __str__(self):
         return self.course.name
+
+
+class Banner(BaseModel):
+    title = models.CharField(max_length=100, verbose_name='标签')
+    image = models.ImageField(upload_to='banner/%Y/%m', max_length=200, verbose_name='轮播图')
+    url = models.URLField(max_length=200, verbose_name='访问地址')
+    index = models.IntegerField(default=0, verbose_name='顺序')
+
+    class Meta:
+        verbose_name = '轮播图'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.title

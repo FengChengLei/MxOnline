@@ -22,6 +22,9 @@ class CourseOrgAdmin():
     search_fields = ['name', 'desc', 'click_nums', 'fav_nums']
     # 过滤器设置
     list_filter = ['name', 'desc', 'click_nums', 'fav_nums']
+    style_fields = {
+        'desc': 'ueditor'
+    }
 
 
 class CityAdmin():

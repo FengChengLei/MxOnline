@@ -1,6 +1,7 @@
 from django.db import models
+from DjangoUeditor.models import UEditorField
 
-from apps.users.models import BaseModel
+from apps.users.models import BaseModel, UserProfile
 # Create your models here.
 
 CATEGORY_CHOICE = (
@@ -23,8 +24,8 @@ class City(BaseModel):
 
 
 class CourseOrg(BaseModel):
-    name = models.CharField(max_length=50,verbose_name='机构名称')
-    desc = models.TextField(verbose_name='描述')
+    name = models.CharField(max_length=50, verbose_name='机构名称')
+    desc = UEditorField(verbose_name='描述', width=600, height=300, imagePath='organizations/ueditor/images', filePath='organizations/ueditor/files', default='')
     tag = models.CharField(default='全国知名', max_length=10, verbose_name='机构标签')
     category = models.CharField(default='pxjg', verbose_name='机构类别', max_length=4, choices=CATEGORY_CHOICE)
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
@@ -33,7 +34,15 @@ class CourseOrg(BaseModel):
     address = models.CharField(max_length=150,verbose_name='机构地址')
     students = models.IntegerField(default=0, verbose_name='学习人数')
     course_nums = models.IntegerField(default=0, verbose_name='课程数')
-    city = models.ForeignKey(City,on_delete=models.CASCADE,verbose_name='所在城市')
+    city = models.ForeignKey(City, on_delete=models.CASCADE,verbose_name='所在城市')
+    is_auth = models.BooleanField(default=False, verbose_name='是否认证')
+    is_gold = models.BooleanField(default=False, verbose_name='是否金牌')
+
+    def course(self):
+        # from apps.courses.models import Course
+        # courses = Course.objects.filter(course_org=self)
+        courses = self.course_set.all()
+        return courses
 
     class Meta:
         verbose_name = '课程机构'
@@ -44,6 +53,7 @@ class CourseOrg(BaseModel):
 
 
 class Teacher(BaseModel):
+    user = models.OneToOneField(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='用户')
     org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name='所属机构')
     name = models.CharField(max_length=50, verbose_name='教师名')
     work_years = models.IntegerField(default=0, verbose_name='工作年限')
@@ -61,3 +71,6 @@ class Teacher(BaseModel):
 
     def __str__(self):
         return self.name
+
+    def course_nums(self):
+        return self.course_set.all().count()
