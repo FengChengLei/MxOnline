@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4f75da86-616a-40f6-995e-9bfd0a0ea6a3" name="mxonline" url="http://212.64.121.122">
+        <fileTransfer accessType="SFTP" host="212.64.121.122" port="22" sshConfigId="99022161-0866-4788-a896-69e03f434b45" sshConfig="root@212.64.121.122:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

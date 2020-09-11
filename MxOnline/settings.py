@@ -155,7 +155,7 @@ STATICFILES_DIRS = [
 # 上传文件路径
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'STATIC')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 修改指定默认用户表
 AUTH_USER_MODEL = 'users.UserProfile'
